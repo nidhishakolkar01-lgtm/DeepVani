@@ -1,5 +1,5 @@
 # DeepVani ML Subsystem Documentation
-## Developer Guide for Computer Vision & Backend Teammates
+## Core ML Architecture & Pipeline Specification
 
 This directory contains the machine learning core of **DeepVani**, implementing real-time 3D kinematic feature vectorization, temporal sliding window classification, LLM context disambiguation, and neural speech synthesis.
 
@@ -13,7 +13,7 @@ backend/
 │   ├── kinematics.py          # Extracts 8-D normalized lip metric vectors from MediaPipe landmarks
 │   ├── dataset_generator.py   # Produces synthetic temporal tensor datasets (30x8) for 15 core phrases
 │   ├── classifier.py          # KinematicBuffer queue & SilentSpeechClassifier ML model
-│   └── README.md              # This guide for CV & Backend developers
+│   └── README.md              # Machine learning subsystem specification
 ├── services/
 │   ├── agent_service.py       # Groq Llama-3-8B context disambiguator & sentence builder
 │   └── tts_service.py         # Edge-TTS neural speech synthesizer wrapper
@@ -25,9 +25,9 @@ backend/
 
 ---
 
-## 🔌 Integration Guide for Teammates
+## 🔌 Pipeline Integration
 
-### 1. For the Computer Vision (CV) Teammate
+### 1. Computer Vision Ingestion Layer
 When capturing frames via OpenCV / MediaPipe Face Mesh:
 1. Extract the 468 3D landmark points array: `landmarks = [{'x': float, 'y': float, 'z': float}, ...]`.
 2. Pass the array to `KinematicExtractor.extract_vector(landmarks)`.
@@ -48,7 +48,7 @@ if is_full:
     tensor_matrix = buffer.get_tensor() # Shape: (30, 8)
 ```
 
-### 2. For the Backend / FastAPI Teammate
+### 2. Backend & Inference Layer
 In your REST API endpoint `/api/v1/decode-silent-speech`:
 1. Receive incoming frame vectors or 30-frame tensor matrix.
 2. Call `classifier.predict(tensor_matrix)`.
