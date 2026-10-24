@@ -1,0 +1,22 @@
+{
+  "name": "deepvani-desktop",
+  "version": "1.0.0",
+  "description": "DeepVani — Real-Time Silent Speech Recognition & Neural Voice Desktop App",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win"
+  },
+  "keywords": [
+    "silent-speech",
+    "lip-reading",
+    "mediapipe",
+    "accessibility",
+    "electron"
+  ],
+  "author": "DeepVani Team",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.0.0"
+  }
+}
